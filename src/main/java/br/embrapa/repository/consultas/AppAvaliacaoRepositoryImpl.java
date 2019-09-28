@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import br.embrapa.model.AppAvaliacao;
 import br.embrapa.model.AppAvaliacao_;
+import br.embrapa.model.AppMonitoramento_;
 import br.embrapa.repository.filter.AppAvaliacaoFilter;
 
 public class AppAvaliacaoRepositoryImpl implements AppAvaliacaoRepositoryQuery {
@@ -74,7 +75,14 @@ public class AppAvaliacaoRepositoryImpl implements AppAvaliacaoRepositoryQuery {
 			predicates.add(builder.like(
 					builder.lower(root.get(AppAvaliacao_.nmAvaliacao)), "%" + appAvaliacaoFilter.getNmAvaliacao().toLowerCase() + "%"));
 		}
-		
+		if(!StringUtils.isEmpty(appAvaliacaoFilter.getNmMonitoramento())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(AppAvaliacao_.cdMonitoramento).get(AppMonitoramento_.nmMonitoramento)), "%" + appAvaliacaoFilter.getNmMonitoramento().toLowerCase() + "%"));
+		}
+		if (appAvaliacaoFilter.getCdMonitoramento() != null) {
+			predicates.add(
+					builder.equal(root.get(AppAvaliacao_.cdMonitoramento), appAvaliacaoFilter.getCdMonitoramento()));
+		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 
