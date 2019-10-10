@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.util.StringUtils;
 
+import br.embrapa.model.AppAvaliacao_;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
 import br.embrapa.model.Verificador_m_;
@@ -47,11 +48,22 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 
 		List<Predicate> predicates = new ArrayList<>();
 		
+		
+		
+		if (modVerificadoresMonitoramentoTemplateFilter.getCdVerificador() != null) {
+			predicates.add(
+					builder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codigo), modVerificadoresMonitoramentoTemplateFilter.getCdVerificador()));
+		}
+		
 		if(!StringUtils.isEmpty(modVerificadoresMonitoramentoTemplateFilter.getNmVerificador())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.nmverificador)), "%" + modVerificadoresMonitoramentoTemplateFilter.getNmVerificador().toLowerCase() + "%"));
-		}
+		};
 		
+		if(!StringUtils.isEmpty(modVerificadoresMonitoramentoTemplateFilter.getCodalfa())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)), "%" + modVerificadoresMonitoramentoTemplateFilter.getCodalfa().toLowerCase() + "%"));
+		};
 		return predicates.toArray(new Predicate[predicates.size()]);
 
 	}

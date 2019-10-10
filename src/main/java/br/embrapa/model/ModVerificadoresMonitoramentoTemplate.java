@@ -24,7 +24,7 @@ public class ModVerificadoresMonitoramentoTemplate {
 	private CadEmpresa cdEmpresa;
 	
 	@ManyToOne
-	@JoinColumn(name="r17_cdverificador")
+	@JoinColumn(name="r17_cdverificador", referencedColumnName="p01_id_Verificador_m")
 	private Verificador_m cdVerificador;
 	
 	@ManyToOne
@@ -81,6 +81,7 @@ public class ModVerificadoresMonitoramentoTemplate {
 		this.cdEmpresa = cdEmpresa;
 	}
 
+	
 	public Verificador_m getCdVerificador() {
 		return cdVerificador;
 	}
