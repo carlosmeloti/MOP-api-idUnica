@@ -48,7 +48,10 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 
 		List<Predicate> predicates = new ArrayList<>();
 		
-		
+		if (modVerificadoresMonitoramentoTemplateFilter.getCdTemplate() != null) {
+			predicates.add(
+					builder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdTemplate), modVerificadoresMonitoramentoTemplateFilter.getCdTemplate()));
+		}
 		
 		if (modVerificadoresMonitoramentoTemplateFilter.getCdVerificador() != null) {
 			predicates.add(
