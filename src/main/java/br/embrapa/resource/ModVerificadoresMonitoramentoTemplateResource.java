@@ -3,6 +3,8 @@ package br.embrapa.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +33,9 @@ public class ModVerificadoresMonitoramentoTemplateResource {
 	
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_VERIFICADOR_M') and #oauth2.hasScope('read')")
-	public List<ModVerificadoresMonitoramentoTemplate> Pesquisar(ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
-		return modVerificadoresMonitoramentoTemplateRepository.filtrar(modVerificadoresMonitoramentoTemplateFilter);
+	public Page<ModVerificadoresMonitoramentoTemplate> Pesquisar(ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter, 
+			Pageable pageable) {
+		return modVerificadoresMonitoramentoTemplateRepository.filtrar(modVerificadoresMonitoramentoTemplateFilter, pageable);
 	}
 	
 	@GetMapping("/{codigo}")

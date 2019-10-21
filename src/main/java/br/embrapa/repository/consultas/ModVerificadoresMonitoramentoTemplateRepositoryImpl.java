@@ -11,9 +11,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import br.embrapa.model.AppAvaliacao_;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
 import br.embrapa.model.Verificador_m_;
@@ -23,10 +25,10 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Override
-	public List<ModVerificadoresMonitoramentoTemplate> filtrar(
-			ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
+	public Page<ModVerificadoresMonitoramentoTemplate> filtrar(ModVerificadoresMonitoramentoTemplateFilter
+			modVerificadoresMonitoramentoTemplateFilter,  Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<ModVerificadoresMonitoramentoTemplate> criteria = builder .createQuery(ModVerificadoresMonitoramentoTemplate.class);
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
@@ -35,19 +37,40 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		criteria.where(predicates);
 		
 		TypedQuery<ModVerificadoresMonitoramentoTemplate> query = manager.createQuery(criteria);
-		return query.getResultList();
-	}
-	
-	
-	
-
-
-	private Predicate[] criarRestricoes(
-			ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter,
-			CriteriaBuilder builder, Root<ModVerificadoresMonitoramentoTemplate> root) {
-
-		List<Predicate> predicates = new ArrayList<>();
+		adiconarRestricoesDePaginacao(query, pageable);
 		
+		return new PageImpl<>(query.getResultList(), pageable, total(modVerificadoresMonitoramentoTemplateFilter));
+	}
+
+
+	private void adiconarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
+		int paginaAtual = pageable.getPageNumber();
+		int totalDeRegistrosPorPagina = pageable.getPageSize();
+		int primeiroRegistroDaPagina = paginaAtual * totalDeRegistrosPorPagina;
+		
+		query.setFirstResult(primeiroRegistroDaPagina);
+		query.setMaxResults(totalDeRegistrosPorPagina);
+		
+	}
+
+
+	private Long total(ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
+		
+		Predicate[] predicates = criarRestricoes(modVerificadoresMonitoramentoTemplateFilter, builder, root);
+		criteria.where(predicates);
+		
+		criteria.select(builder.count(root));
+		return manager.createQuery(criteria).getSingleResult();
+	}
+
+
+	private Predicate[] criarRestricoes(ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter, CriteriaBuilder builder,
+			Root<ModVerificadoresMonitoramentoTemplate> root) {
+		
+		List<Predicate> predicates = new ArrayList<>();
 		if (modVerificadoresMonitoramentoTemplateFilter.getCdTemplate() != null) {
 			predicates.add(
 					builder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdTemplate), modVerificadoresMonitoramentoTemplateFilter.getCdTemplate()));
@@ -68,9 +91,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 					builder.lower(root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)), "%" + modVerificadoresMonitoramentoTemplateFilter.getCodalfa().toLowerCase() + "%"));
 		};
 		return predicates.toArray(new Predicate[predicates.size()]);
-
 	}
 
-	
 
 }
