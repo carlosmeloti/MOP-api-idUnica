@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("mopapi")
 public class MopApiProperty {
-	private String originPermitida = "http://localhost:4200";
+	private String originPermitida = "http://10.132.90.58:4200";
 	private final Seguranca seguranca = new Seguranca();
 	
 	
