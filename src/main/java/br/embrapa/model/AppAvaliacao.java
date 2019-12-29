@@ -2,6 +2,7 @@ package br.embrapa.model;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @Table(name="d19_avaliacao")
 public class AppAvaliacao{
 	
-	@ManyToOne
+	@ManyToOne//(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="d19_cdempresa", referencedColumnName="d24_cdempresa")
 	private CadEmpresa cdEmpresa;
 	

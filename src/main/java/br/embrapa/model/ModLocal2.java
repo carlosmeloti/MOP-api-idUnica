@@ -1,5 +1,6 @@
 package br.embrapa.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class ModLocal2 {
 	@Column(name="d04_cdlocal2")
 	private Long cdLocal2;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="d04_cdlocal1", referencedColumnName="d03_cdlocal1")
 	private ModLocal1 cdLocal1;
 	
