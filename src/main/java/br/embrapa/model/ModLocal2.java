@@ -20,12 +20,12 @@ public class ModLocal2 {
 	@Column(name="d04_cdlocal2")
 	private Long cdLocal2;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="d04_cdlocal1", referencedColumnName="d03_cdlocal1")
+	@ManyToOne
+	@JoinColumn(name="d04_cdlocal1")
 	private ModLocal1 cdLocal1;
 	
 	@ManyToOne
-	@JoinColumn(name="d04_cdempresa", referencedColumnName="d24_cdempresa")
+	@JoinColumn(name="d04_cdempresa")
 	private CadEmpresa cdEmpresa;
 	
 	@Column(name="d04_nmlocal2")
