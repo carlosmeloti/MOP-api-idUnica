@@ -3,6 +3,7 @@ package br.embrapa.repository.filter;
 public class CadFrequenciaFilter {
 
 	private String nmFrequencia;
+	private Long cdEmpresa;
 
 	public String getNmFrequencia() {
 		return nmFrequencia;
@@ -13,6 +14,15 @@ public class CadFrequenciaFilter {
 		this.nmFrequencia = nmFrequencia;
 		
 	}
+
+	public Long getCdEmpresa() {
+		return cdEmpresa;
+	}
+
+	public void setCdEmpresa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
+	}
+	
 	
 	
 

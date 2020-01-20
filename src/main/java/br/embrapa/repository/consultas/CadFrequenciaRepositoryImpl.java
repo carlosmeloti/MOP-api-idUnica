@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import br.embrapa.model.CadAmostragem_;
 import br.embrapa.model.CadFrequencia;
 import br.embrapa.model.CadFrequencia_;
 import br.embrapa.repository.filter.CadFrequenciaFilter;
@@ -78,6 +79,10 @@ public class CadFrequenciaRepositoryImpl implements CadFrequenciaRepositoryQuery
 		if(!StringUtils.isEmpty(cadFrequenciaFilter.getNmFrequencia())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(CadFrequencia_.nmFrequencia)), "%" + cadFrequenciaFilter.getNmFrequencia().toLowerCase() + "%"));
+		}
+		if (cadFrequenciaFilter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(CadFrequencia_.cdEmpresa), cadFrequenciaFilter.getCdEmpresa()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

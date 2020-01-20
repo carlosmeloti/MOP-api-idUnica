@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import br.embrapa.model.CadAmostragem;
 import br.embrapa.model.CadAmostragem_;
+import br.embrapa.model.ModLocal2_;
 import br.embrapa.repository.filter.CadAmostragemFilter;
 import br.embrapa.repository.projections.ResumoCadAmostragem;
 
@@ -48,7 +49,8 @@ public class CadAmostragemRepositoryImpl implements CadAmostragemRepositoryQuery
 		
 		criteria.select(builder.construct(ResumoCadAmostragem.class
 				, root.get(CadAmostragem_.cdAmostragem)
-				, root.get(CadAmostragem_.nmAmostragem)));
+				, root.get(CadAmostragem_.nmAmostragem)
+				, root.get(CadAmostragem_.cdEmpresa)));
 		
 		
 		Predicate[] predicates = criarRestricoes(cadAmostragemFilter, builder, root);
@@ -92,7 +94,11 @@ public class CadAmostragemRepositoryImpl implements CadAmostragemRepositoryQuery
 			predicates.add(builder.like(
 					builder.lower(root.get(CadAmostragem_.nmAmostragem)), "%" + cadAmostragemFilter.getNmamostragem().toLowerCase() + "%"));
 		}
-		
+		if (cadAmostragemFilter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(CadAmostragem_.cdEmpresa), cadAmostragemFilter.getCdEmpresa()));
+		}
+
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	

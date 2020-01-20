@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import br.embrapa.model.CadFrequencia_;
 import br.embrapa.model.CadTipoDeMetodo;
 import br.embrapa.model.CadTipoDeMetodo_;
 import br.embrapa.repository.filter.CadTipoDeMetodoFilter;
@@ -79,6 +80,10 @@ public class CadTipoDeMetodoRepositoryImpl implements CadTipoDeMetodoRepositoryQ
 		if(!StringUtils.isEmpty(cadTipoDeMetodoFilter.getTipometodo())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(CadTipoDeMetodo_.nmTipoDeMetodo)), "%" + cadTipoDeMetodoFilter.getTipometodo().toLowerCase() + "%"));
+		}
+		if (cadTipoDeMetodoFilter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(CadTipoDeMetodo_.cdEmpresa), cadTipoDeMetodoFilter.getCdEmpresa()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
