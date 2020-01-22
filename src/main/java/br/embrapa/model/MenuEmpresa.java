@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="menu_empresa")
-public class MenuEmpresa { 
+public class MenuEmpresa {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -58,8 +58,9 @@ public class MenuEmpresa {
 		} else if (!cdEmprsa.equals(other.cdEmprsa))
 			return false;
 		return true;
-	}
+	} 
 	
 	
+
 	
 }

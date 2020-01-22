@@ -8,6 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(CadEmpresa.class)
 public abstract class CadEmpresa_ {
 
+	
 	public static volatile SingularAttribute<CadEmpresa, String> pessoContato;
 	public static volatile SingularAttribute<CadEmpresa, Long> cdEmpresa;
 	public static volatile SingularAttribute<CadEmpresa, String> nrTelefone;
@@ -16,6 +17,5 @@ public abstract class CadEmpresa_ {
 	public static volatile SingularAttribute<CadEmpresa, String> diretorioArquivos;
 	public static volatile SingularAttribute<CadEmpresa, String> cnpjEmpresa;
 	public static volatile SingularAttribute<CadEmpresa, String> nmEmpresa;
-
 }
 
