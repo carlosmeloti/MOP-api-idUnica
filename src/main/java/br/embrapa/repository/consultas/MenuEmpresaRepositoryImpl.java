@@ -16,8 +16,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import br.embrapa.model.CadEmpresa;
-import br.embrapa.model.CadEmpresa_;
 import br.embrapa.model.MenuEmpresa;
 import br.embrapa.model.MenuEmpresa_;
 import br.embrapa.repository.filter.MenuEmpresaFilter;
@@ -26,16 +24,32 @@ public class MenuEmpresaRepositoryImpl implements MenuEmpresaRepositoryQuery {
 
 	@PersistenceContext
 	private EntityManager manager;
+	
+	
+	public List<MenuEmpresa> recuperarEmpresSelecionada() {
+	    List<MenuEmpresa> empresas = manager.createNamedQuery("recuperarEmpresSelecionada", MenuEmpresa.class)
+	                                            .getResultList();
+	    return empresas;
+	}
 
 	
 	@Override
 	public Page<MenuEmpresa> filtrar(MenuEmpresaFilter menuEmpresaFilter, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<MenuEmpresa>  criteria = builder .createQuery(MenuEmpresa.class);
+		Root<MenuEmpresa> root = criteria.from(MenuEmpresa.class);
 
-	private Object total(MenuEmpresaFilter menuEmpresaFilter) {
+		Predicate[] predicates = criarRestricoes(menuEmpresaFilter, builder, root);
+		criteria.where(predicates);
+		
+		TypedQuery<MenuEmpresa> query = manager.createQuery(criteria);
+		
+		adiconarRestricoesDePaginacao(query, pageable);
+		
+		return new PageImpl<>(query.getResultList(), pageable, total(menuEmpresaFilter));
+	}                                    
+
+	private Long total(MenuEmpresaFilter menuEmpresaFilter){
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 		Root<MenuEmpresa> root = criteria.from(MenuEmpresa.class);
@@ -69,7 +83,8 @@ public class MenuEmpresaRepositoryImpl implements MenuEmpresaRepositoryQuery {
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 
-	
+
+		
 
 	
 	

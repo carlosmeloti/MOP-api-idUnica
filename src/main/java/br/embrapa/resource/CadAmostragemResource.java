@@ -41,6 +41,8 @@ public class CadAmostragemResource {
 		return cadAmostragemRepository.filtrar(cadAmostragemFilter, pageable);
 	}
 	
+	
+	
 	@GetMapping(params = "resumo")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CADAMOSTRAGEM') and #oauth2.hasScope('read')")
 	public Page<ResumoCadAmostragem> resumir(CadAmostragemFilter cadAmostragemFilter, Pageable pageable) {

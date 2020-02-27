@@ -7,4 +7,6 @@ import br.embrapa.repository.consultas.CadAmostragemRepositoryQuery;
 
 public interface CadAmostragemRepository extends JpaRepository<CadAmostragem, Long>, CadAmostragemRepositoryQuery {
 
+	
+	
 }

@@ -1,31 +1,45 @@
 package br.embrapa.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="menu_empresa")
-public class MenuEmpresa {
+/*
+ * @NamedNativeQuery( name = "recuperarEmpresSelecionada", query =
+ * "select * from menu_empresa", resultClass=MenuEmpresa.class )
+ */
+public class MenuEmpresa implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="cdempresa")
-	private Long cdEmprsa;
+	private Long cdEmpresa;
 	
-	@Column(name="nmEmpresa")
+	@Column(name="nmempresa")
 	private String nmEmpresa;
-
-	public Long getCdEmprsa() {
-		return cdEmprsa;
+	
+	
+	public Long getCdEmpresa() {
+		return cdEmpresa;
 	}
 
-	public void setCdEmprsa(Long cdEmprsa) {
-		this.cdEmprsa = cdEmprsa;
+	public void setCdEmprsa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
 	}
+	
+	
 
 	public String getNmEmpresa() {
 		return nmEmpresa;
@@ -39,7 +53,7 @@ public class MenuEmpresa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cdEmprsa == null) ? 0 : cdEmprsa.hashCode());
+		result = prime * result + ((cdEmpresa == null) ? 0 : cdEmpresa.hashCode());
 		return result;
 	}
 
@@ -52,10 +66,10 @@ public class MenuEmpresa {
 		if (getClass() != obj.getClass())
 			return false;
 		MenuEmpresa other = (MenuEmpresa) obj;
-		if (cdEmprsa == null) {
-			if (other.cdEmprsa != null)
+		if (cdEmpresa == null) {
+			if (other.cdEmpresa != null)
 				return false;
-		} else if (!cdEmprsa.equals(other.cdEmprsa))
+		} else if (!cdEmpresa.equals(other.cdEmpresa))
 			return false;
 		return true;
 	} 

@@ -8,4 +8,5 @@ import br.embrapa.repository.consultas.MenuEmpresaRepositoryQuery;
 
 public interface MenuEmpresaRepository extends JpaRepository<MenuEmpresa, Long>, MenuEmpresaRepositoryQuery {
 
+	
 }
