@@ -20,12 +20,9 @@ public class AppMonitoramento {
 	@Column(name="d18_cdmonitoramento")
 	private Long cdMonitoramento;
 	 
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name="d18_cdtemplate", referencedColumnName = "d14_cdtemplate")
-	 * private ModMonitoramentoTemplate cdTemplate;
-	 */
+	@ManyToOne
+	@JoinColumn(name="d18_cdtemplate", referencedColumnName = "d14_cdtemplate")
+	private ModMonitoramentoTemplate cdTemplate;
 	
 	@ManyToOne
 	@JoinColumn(name="d18_cdempresa", referencedColumnName="d24_cdempresa")
@@ -52,12 +49,13 @@ public class AppMonitoramento {
 		this.cdMonitoramento = cdMonitoramento;
 	}
 
-	/*
-	 * public ModMonitoramentoTemplate getCdTemplate() { return cdTemplate; }
-	 * 
-	 * public void setCdTemplate(ModMonitoramentoTemplate cdTemplate) {
-	 * this.cdTemplate = cdTemplate; }
-	 */
+	public ModMonitoramentoTemplate getCdTemplate() {
+		return cdTemplate;
+	}
+
+	public void setCdTemplate(ModMonitoramentoTemplate cdTemplate) {
+		this.cdTemplate = cdTemplate;
+	}
 
 	public CadEmpresa getCdEmpresa() {
 		return cdEmpresa;
