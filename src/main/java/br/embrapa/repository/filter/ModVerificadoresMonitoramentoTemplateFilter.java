@@ -2,6 +2,10 @@ package br.embrapa.repository.filter;
 
 public class ModVerificadoresMonitoramentoTemplateFilter {
 
+	private Long cdVeriMod;
+	
+	private Long cdEmpresa;
+	
 	private String nmVerificador;
 	
 	private Long cdTemplate;
@@ -9,6 +13,24 @@ public class ModVerificadoresMonitoramentoTemplateFilter {
 	private Long cdVerificador;
 	
 	private String codalfa;
+	
+	
+	
+	public Long getCdEmpresa() {
+		return cdEmpresa;
+	}
+
+	public void setCdEmpresa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
+	}
+
+	public Long getCdVeriMod() {
+		return cdVeriMod;
+	}
+
+	public void setCdVeriMod(Long cdVeriMod) {
+		this.cdVeriMod = cdVeriMod;
+	}
 
 	public String getNmVerificador() {
 		return nmVerificador;
