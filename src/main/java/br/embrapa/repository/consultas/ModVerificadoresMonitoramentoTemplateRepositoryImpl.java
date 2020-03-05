@@ -42,13 +42,28 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		return new PageImpl<>(query.getResultList(), pageable, total(modVerificadoresMonitoramentoTemplateFilter));
 	}
 	
+	public List<ResumoVerificadoresMonitoramentoTemplate> resumir(
+			ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
+		CriteriaBuilder builder = manager .getCriteriaBuilder();
+		CriteriaQuery<ResumoVerificadoresMonitoramentoTemplate> criteria = builder.createQuery(ResumoVerificadoresMonitoramentoTemplate.class);
+		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
 	
+		criteria.select(builder.construct(ResumoVerificadoresMonitoramentoTemplate.class
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVeriMod)
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdVerificador)
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.sigla)
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.nmverificador)
+				)).distinct(true);
+		 
+		
+		Predicate[] predicates = criarRestricoes(modVerificadoresMonitoramentoTemplateFilter, builder, root);
+		criteria.where(predicates);
+		
+		TypedQuery<ResumoVerificadoresMonitoramentoTemplate> query = manager.createQuery(criteria);
+		return query.getResultList();
+	}
 	
-	
-	
-	
-
-
 
 	private void adiconarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
 		int paginaAtual = pageable.getPageNumber();
@@ -113,26 +128,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 
 
 
-	public List<ResumoVerificadoresMonitoramentoTemplate> resumir(
-			ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
-		CriteriaBuilder builder = manager .getCriteriaBuilder();
-		CriteriaQuery<ResumoVerificadoresMonitoramentoTemplate> criteria = builder.createQuery(ResumoVerificadoresMonitoramentoTemplate.class);
-		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
 	
-		criteria.select(builder.construct(ResumoVerificadoresMonitoramentoTemplate.class
-				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdVerificador)
-				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
-				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.sigla)
-				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.nmverificador)
-				)).distinct(true);
-		 
-		
-		Predicate[] predicates = criarRestricoes(modVerificadoresMonitoramentoTemplateFilter, builder, root);
-		criteria.where(predicates);
-		
-		TypedQuery<ResumoVerificadoresMonitoramentoTemplate> query = manager.createQuery(criteria);
-		return query.getResultList();
-	}
 
 
 	
