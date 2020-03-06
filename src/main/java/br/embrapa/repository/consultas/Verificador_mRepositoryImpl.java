@@ -71,23 +71,30 @@ public class Verificador_mRepositoryImpl implements Verificador_mRepositoryQuery
 			Root<Verificador_m> root) {
 		
 		List<Predicate> predicates = new ArrayList<>();
-		if(!StringUtils.isEmpty(verificador_mFilter.getNmTipoDeVerificador())) {
-			predicates.add(builder.like(
-				builder.lower(root.get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.nmTipoDeVerificador)), "%" + verificador_mFilter.getNmTipoDeVerificador().toLowerCase() + "%"));
-		}
+		
 		
 		if (verificador_mFilter.getCdTipoDeVerificador() != null) {
 			predicates.add(
-					builder.equal(root.get(Verificador_m_.cdTipoDeVerificador), verificador_mFilter.getCdTipoDeVerificador()));
-}
-		if (verificador_mFilter.getCdTipoDeVerificador() != null) {
-			predicates.add(
-					builder.equal(root.get(Verificador_m_.cdVerificador), verificador_mFilter.getCdVerificador()));
-}
-		if (verificador_mFilter.getCodigo() != null) {
-			predicates.add(
-					builder.equal(root.get(Verificador_m_.codigo), verificador_mFilter.getCodigo()));
-}
+					builder.equal(root.get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador), verificador_mFilter.getCdTipoDeVerificador()));
+		} 
+		
+		
+		/*
+		 * if(!StringUtils.isEmpty(verificador_mFilter.getNmTipoDeVerificador())) {
+		 * predicates.add(builder.like(
+		 * builder.lower(root.get(Verificador_m_.cdTipoDeVerificador).get(
+		 * CadTipoDeVerificador_.nmTipoDeVerificador)), "%" +
+		 * verificador_mFilter.getNmTipoDeVerificador().toLowerCase() + "%")); }
+		 */
+		
+		/*
+			 * if (verificador_mFilter.getCdTipoDeVerificador() != null) { predicates.add(
+			 * builder.equal(root.get(Verificador_m_.cdVerificador),
+			 * verificador_mFilter.getCdVerificador())); } if
+			 * (verificador_mFilter.getCodigo() != null) { predicates.add(
+			 * builder.equal(root.get(Verificador_m_.codigo),
+			 * verificador_mFilter.getCodigo())); }
+			 */
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
