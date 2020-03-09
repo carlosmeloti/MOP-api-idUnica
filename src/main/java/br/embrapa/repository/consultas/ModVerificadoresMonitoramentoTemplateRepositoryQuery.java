@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import br.embrapa.dto.TodosOsVerificadores;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.repository.filter.CadFrequenciaFilter;
 import br.embrapa.repository.filter.ModVerificadoresMonitoramentoTemplateFilter;
@@ -12,6 +13,8 @@ import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplat
 
 public interface ModVerificadoresMonitoramentoTemplateRepositoryQuery {
 
+	public List<TodosOsVerificadores> todosVerificadores(Long cdTemplate);
+	
 	public Page<ModVerificadoresMonitoramentoTemplate> filtrar(ModVerificadoresMonitoramentoTemplateFilter 
 			modVerificadoresMonitoramentoTemplateFilter, Pageable pageable);
 	

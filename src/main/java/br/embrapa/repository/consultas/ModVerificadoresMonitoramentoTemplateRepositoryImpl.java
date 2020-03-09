@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import br.embrapa.dto.TodosOsVerificadores;
 import br.embrapa.model.CadNivelDeAvaliacao_;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
@@ -27,6 +28,37 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 
 	@PersistenceContext
 	private EntityManager manager;
+	
+	public List<TodosOsVerificadores> todosVerificadores(Long cdTemplate) {
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+		
+		CriteriaQuery<TodosOsVerificadores> criteriaQuery = criteriaBuilder.
+				createQuery(TodosOsVerificadores.class);
+		
+		Root<ModVerificadoresMonitoramentoTemplate> root = criteriaQuery.from(ModVerificadoresMonitoramentoTemplate.class);
+		
+		criteriaQuery.select(criteriaBuilder.construct(TodosOsVerificadores.class, 
+				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa),
+				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.nmNivelDeAvaliacao),
+				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.p01_graco),
+				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAgrupada),
+				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAnalitica)
+				)).distinct(true);
+		
+		criteriaQuery.where(
+				criteriaBuilder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdTemplate), 
+						cdTemplate));
+		
+		/*
+		 * criteriaQuery.groupBy(root.get(Lancamento_.tipo),
+		 * root.get(Lancamento_.pessoa));
+		 */
+		
+		TypedQuery<TodosOsVerificadores> typedQuery = manager
+				.createQuery(criteriaQuery);
+		
+		return typedQuery.getResultList();
+	}
 	
 	@Override
 	public Page<ModVerificadoresMonitoramentoTemplate> filtrar(ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter, Pageable pageable) {
