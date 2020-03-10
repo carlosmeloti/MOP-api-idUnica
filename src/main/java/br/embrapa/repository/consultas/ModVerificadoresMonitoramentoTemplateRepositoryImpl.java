@@ -82,7 +82,6 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
 	
 		criteria.select(builder.construct(ResumoVerificadoresMonitoramentoTemplate.class
-				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVeriMod)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdVerificador)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.sigla)
