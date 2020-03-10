@@ -23,21 +23,22 @@ import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
 import br.embrapa.model.Verificador_m_;
 import br.embrapa.repository.filter.ModVerificadoresMonitoramentoTemplateFilter;
 import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplate;
+import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplateTeste;
 
 public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModVerificadoresMonitoramentoTemplateRepositoryQuery {
 
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public List<TodosOsVerificadores> todosVerificadores(Long cdTemplate) {
+	public List<ResumoVerificadoresMonitoramentoTemplateTeste> todosVerificadores(Long cdTemplate) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		
-		CriteriaQuery<TodosOsVerificadores> criteriaQuery = criteriaBuilder.
-				createQuery(TodosOsVerificadores.class);
+		CriteriaQuery<ResumoVerificadoresMonitoramentoTemplateTeste> criteriaQuery = criteriaBuilder.
+				createQuery(ResumoVerificadoresMonitoramentoTemplateTeste.class);
 		
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteriaQuery.from(ModVerificadoresMonitoramentoTemplate.class);
 		
-		criteriaQuery.select(criteriaBuilder.construct(TodosOsVerificadores.class, 
+		criteriaQuery.select(criteriaBuilder.construct(ResumoVerificadoresMonitoramentoTemplateTeste.class, 
 				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa),
 				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.nmNivelDeAvaliacao),
 				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.p01_graco),
@@ -54,7 +55,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		 * root.get(Lancamento_.pessoa));
 		 */
 		
-		TypedQuery<TodosOsVerificadores> typedQuery = manager
+		TypedQuery<ResumoVerificadoresMonitoramentoTemplateTeste> typedQuery = manager
 				.createQuery(criteriaQuery);
 		
 		return typedQuery.getResultList();

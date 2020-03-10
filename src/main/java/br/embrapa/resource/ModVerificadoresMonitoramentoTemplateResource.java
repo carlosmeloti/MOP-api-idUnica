@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.embrapa.dto.TodosOsVerificadores;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.repository.ModVerificadoresMonitoramentoTemplateRepository;
 import br.embrapa.repository.consultas.ModVerificadoresMonitoramentoTemplateRepositoryImpl;
@@ -26,6 +27,7 @@ import br.embrapa.repository.filter.CadFrequenciaFilter;
 import br.embrapa.repository.filter.ModVerificadoresMonitoramentoTemplateFilter;
 import br.embrapa.repository.projections.ResumoCadFrequencia;
 import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplate;
+import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplateTeste;
 import br.embrapa.service.ModVerificadoresMonitoramentoTemplateService;
 
 
@@ -55,6 +57,12 @@ public class ModVerificadoresMonitoramentoTemplateResource {
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CADFREQUENCIA') and #oauth2.hasScope('read')")
 	public List<ResumoVerificadoresMonitoramentoTemplate> resumir(ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
 		return modVerificadoresMonitoramentoTemplateRepository.resumir(modVerificadoresMonitoramentoTemplateFilter );
+	}
+	
+	@GetMapping("/teste")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CADFREQUENCIA') and #oauth2.hasScope('read')")
+	public List<ResumoVerificadoresMonitoramentoTemplateTeste> todosVerificadores(Long cdTemplate) {
+		return modVerificadoresMonitoramentoTemplateRepository.todosVerificadores(cdTemplate);
 	}
 	
 		

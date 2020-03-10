@@ -10,10 +10,11 @@ import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.repository.filter.CadFrequenciaFilter;
 import br.embrapa.repository.filter.ModVerificadoresMonitoramentoTemplateFilter;
 import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplate;
+import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplateTeste;
 
 public interface ModVerificadoresMonitoramentoTemplateRepositoryQuery {
 
-	public List<TodosOsVerificadores> todosVerificadores(Long cdTemplate);
+	public List<ResumoVerificadoresMonitoramentoTemplateTeste> todosVerificadores(Long cdTemplate);
 	
 	public Page<ModVerificadoresMonitoramentoTemplate> filtrar(ModVerificadoresMonitoramentoTemplateFilter 
 			modVerificadoresMonitoramentoTemplateFilter, Pageable pageable);
