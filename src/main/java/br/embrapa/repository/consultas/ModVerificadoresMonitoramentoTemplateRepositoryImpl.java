@@ -30,20 +30,20 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public List<ResumoVerificadoresMonitoramentoTemplateTeste> todosVerificadores(Long cdTemplate) {
+	public List<TodosOsVerificadores> todosVerificadores(Long cdTemplate) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		
-		CriteriaQuery<ResumoVerificadoresMonitoramentoTemplateTeste> criteriaQuery = criteriaBuilder.
-				createQuery(ResumoVerificadoresMonitoramentoTemplateTeste.class);
+		CriteriaQuery<TodosOsVerificadores> criteriaQuery = criteriaBuilder.
+				createQuery(TodosOsVerificadores.class);
 		
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteriaQuery.from(ModVerificadoresMonitoramentoTemplate.class);
 		
-		criteriaQuery.select(criteriaBuilder.construct(ResumoVerificadoresMonitoramentoTemplateTeste.class, 
-				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa),
-				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.nmNivelDeAvaliacao),
+		criteriaQuery.select(criteriaBuilder.construct(TodosOsVerificadores.class, 
+				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
+				/*root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.nmNivelDeAvaliacao),
 				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.p01_graco),
 				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAgrupada),
-				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAnalitica)
+				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAnalitica)*/
 				)).distinct(true);
 		
 		criteriaQuery.where(
@@ -55,7 +55,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		 * root.get(Lancamento_.pessoa));
 		 */
 		
-		TypedQuery<ResumoVerificadoresMonitoramentoTemplateTeste> typedQuery = manager
+		TypedQuery<TodosOsVerificadores> typedQuery = manager
 				.createQuery(criteriaQuery);
 		
 		return typedQuery.getResultList();
