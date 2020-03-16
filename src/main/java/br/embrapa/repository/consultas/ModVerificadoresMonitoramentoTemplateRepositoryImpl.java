@@ -39,11 +39,12 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteriaQuery.from(ModVerificadoresMonitoramentoTemplate.class);
 		
 		criteriaQuery.select(criteriaBuilder.construct(TodosOsVerificadores.class, 
-				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
-				/*root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.nmNivelDeAvaliacao),
+				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa),
+				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.nmNivelDeAvaliacao),
 				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.p01_graco),
 				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAgrupada),
-				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAnalitica)*/
+				root.get(ModVerificadoresMonitoramentoTemplate_.txColetaAnalitica),
+				root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.nmverificador)
 				)).distinct(true);
 		
 		criteriaQuery.where(
