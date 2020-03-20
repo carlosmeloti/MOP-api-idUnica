@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import br.embrapa.model.CadTipoDeVerificador;
 import br.embrapa.model.CadTipoDeVerificador_;
+import br.embrapa.model.ModLocal2_;
 import br.embrapa.repository.filter.CadTipoDeVerificadorFilter;
 
 public class CadTipoDeVerificadorRepositoryImpl implements CadTipoDeVerificadorRepositoryQuery {
@@ -44,6 +45,10 @@ public class CadTipoDeVerificadorRepositoryImpl implements CadTipoDeVerificadorR
 			Root<CadTipoDeVerificador> root) {
 		
 		List<Predicate> predicates = new ArrayList<>();
+		if (cadTipoDeVerificadorFilter.getCdTipoDeVerificador() != null) {
+			predicates.add(
+					builder.equal(root.get(CadTipoDeVerificador_.cdTipoDeVerificador), cadTipoDeVerificadorFilter.getCdTipoDeVerificador()));
+		}
 		if(!StringUtils.isEmpty(cadTipoDeVerificadorFilter.getNmTipoDeVerificador())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(CadTipoDeVerificador_.nmTipoDeVerificador)), "%" + cadTipoDeVerificadorFilter.getNmTipoDeVerificador().toLowerCase() + "%"));
