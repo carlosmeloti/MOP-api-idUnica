@@ -1,32 +1,29 @@
 package br.embrapa.repository.filter;
 
-import br.embrapa.model.CadTipoDeVerificador;
-
 public class ModMonitoramentoTemplateFilter {
 	
-	private Long CdTemplate;
-	private String NmTemplate;
-	private String CdTipoDeVerificador;
+	private Long cdTemplate;
+	private String nmTemplate;
+	private Long cdTipoDeVerificador;
 	
 	
 	public Long getCdTemplate() {
-		return CdTemplate;
+		return cdTemplate;
 	}
 	public void setCdTemplate(Long cdTemplate) {
-		CdTemplate = cdTemplate;
+		this.cdTemplate = cdTemplate;
 	}
 	public String getNmTemplate() {
-		return NmTemplate;
+		return nmTemplate;
 	}
 	public void setNmTemplate(String nmTemplate) {
-		NmTemplate = nmTemplate;
+		this.nmTemplate = nmTemplate;
 	}
-	
-	public String getCdTipoDeVerificador() {
-		return CdTipoDeVerificador;
+	public Long getCdTipoDeVerificador() {
+		return cdTipoDeVerificador;
 	}
-	public void setCdTipoDeVerificador(String cdTipoDeVerificador) {
-		CdTipoDeVerificador = cdTipoDeVerificador;
+	public void setCdTipoDeVerificador(Long cdTipoDeVerificador) {
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
 	}
 	
 	

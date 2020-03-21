@@ -16,44 +16,44 @@ public class ModMonitoramentoTemplate {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="d14_cdtemplate")
-	private Long CdTemplate;
+	private Long cdTemplate;
 	
 	@Column(name="d14_nmtemplate")
-	private String NmTemplate;
+	private String nmTemplate;
 	
 	@ManyToOne
 	@JoinColumn(name="d14_cdtipoverificador")
-	private CadTipoDeVerificador CdTipoDeVerificador;
+	private CadTipoDeVerificador cdTipoDeVerificador;
 
 	public Long getCdTemplate() {
-		return CdTemplate;
+		return cdTemplate;
 	}
 
 	public void setCdTemplate(Long cdTemplate) {
-		CdTemplate = cdTemplate;
+		this.cdTemplate = cdTemplate;
 	}
 
 	public String getNmTemplate() {
-		return NmTemplate;
+		return nmTemplate;
 	}
 
 	public void setNmTemplate(String nmTemplate) {
-		NmTemplate = nmTemplate;
+		this.nmTemplate = nmTemplate;
 	}
 
 	public CadTipoDeVerificador getCdTipoDeVerificador() {
-		return CdTipoDeVerificador;
+		return cdTipoDeVerificador;
 	}
 
 	public void setCdTipoDeVerificador(CadTipoDeVerificador cdTipoDeVerificador) {
-		CdTipoDeVerificador = cdTipoDeVerificador;
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((CdTemplate == null) ? 0 : CdTemplate.hashCode());
+		result = prime * result + ((cdTemplate == null) ? 0 : cdTemplate.hashCode());
 		return result;
 	}
 
@@ -66,13 +66,15 @@ public class ModMonitoramentoTemplate {
 		if (getClass() != obj.getClass())
 			return false;
 		ModMonitoramentoTemplate other = (ModMonitoramentoTemplate) obj;
-		if (CdTemplate == null) {
-			if (other.CdTemplate != null)
+		if (cdTemplate == null) {
+			if (other.cdTemplate != null)
 				return false;
-		} else if (!CdTemplate.equals(other.CdTemplate))
+		} else if (!cdTemplate.equals(other.cdTemplate))
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	

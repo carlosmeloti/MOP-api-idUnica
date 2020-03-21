@@ -2,20 +2,32 @@ package br.embrapa.repository.projections;
 
 public class ResumoVerificadoresMonitoramentoTemplate {
 	
-	
+	private Long cdTipoDeVerificador;
 	private Long cdVerificador;
 	private String codalfa;
 	private String sigla;
 	private String nmVerificador;
 
-	public ResumoVerificadoresMonitoramentoTemplate(Long cdVerificador, String codalfa, String sigla, String nmVerificador) {
+	public ResumoVerificadoresMonitoramentoTemplate(Long cdTipoDeVerificador, Long cdVerificador, String codalfa, String sigla, String nmVerificador) {
 		
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
 		this.cdVerificador = cdVerificador;
 		this.codalfa = codalfa;
 		this.sigla = sigla;
 		this.nmVerificador = nmVerificador;
 	}
 	
+
+	public Long getCdTipoDeVerificador() {
+		return cdTipoDeVerificador;
+	}
+
+
+
+	public void setCdTipoDeVerificador(Long cdTipoDeVerificador) {
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
+	}
+
 
 
 	public Long getCdVerificador() {

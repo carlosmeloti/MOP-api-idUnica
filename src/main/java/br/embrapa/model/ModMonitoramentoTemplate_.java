@@ -8,9 +8,9 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(ModMonitoramentoTemplate.class)
 public abstract class ModMonitoramentoTemplate_ {
 
-	public static volatile SingularAttribute<ModMonitoramentoTemplate, String> NmTemplate;
-	public static volatile SingularAttribute<ModMonitoramentoTemplate, Long> CdTemplate;
-	public static volatile SingularAttribute<ModMonitoramentoTemplate, CadTipoDeVerificador> CdTipoDeVerificador;
+	public static volatile SingularAttribute<ModMonitoramentoTemplate, CadTipoDeVerificador> cdTipoDeVerificador;
+	public static volatile SingularAttribute<ModMonitoramentoTemplate, Long> cdTemplate;
+	public static volatile SingularAttribute<ModMonitoramentoTemplate, String> nmTemplate;
 
 }
 

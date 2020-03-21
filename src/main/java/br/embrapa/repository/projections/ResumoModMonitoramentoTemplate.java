@@ -1,43 +1,47 @@
 package br.embrapa.repository.projections;
 
-import br.embrapa.model.CadTipoDeVerificador;
-
 public class ResumoModMonitoramentoTemplate {
 
 
-	private Long CdTemplate;
-	private String NmTemplate;
-	private CadTipoDeVerificador CdTipoDeVerificador;
+	private Long cdTemplate;
+	private String nmTemplate;
+	private Long cdTipoDeVerificador;
 	
-	public ResumoModMonitoramentoTemplate(Long cdTemplate, String nmTemplate,
-		CadTipoDeVerificador cdTipoDeVerificador) {
-		CdTemplate = cdTemplate;
-		NmTemplate = nmTemplate;
-		CdTipoDeVerificador = cdTipoDeVerificador;
+	
+	public ResumoModMonitoramentoTemplate(Long cdTemplate, String nmTemplate, Long cdTipoDeVerificador) {
+		this.cdTemplate = cdTemplate;
+		this.nmTemplate = nmTemplate;
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
 	}
+
 
 	public Long getCdTemplate() {
-		return CdTemplate;
+		return cdTemplate;
 	}
+
 
 	public void setCdTemplate(Long cdTemplate) {
-		CdTemplate = cdTemplate;
+		this.cdTemplate = cdTemplate;
 	}
+
 
 	public String getNmTemplate() {
-		return NmTemplate;
+		return nmTemplate;
 	}
+
 
 	public void setNmTemplate(String nmTemplate) {
-		NmTemplate = nmTemplate;
+		this.nmTemplate = nmTemplate;
 	}
 
-	public CadTipoDeVerificador getCdTipoDeVerificador() {
-		return CdTipoDeVerificador;
+
+	public Long getCdTipoDeVerificador() {
+		return cdTipoDeVerificador;
 	}
 
-	public void setCdTipoDeVerificador(CadTipoDeVerificador cdTipoDeVerificador) {
-		CdTipoDeVerificador = cdTipoDeVerificador;
+
+	public void setCdTipoDeVerificador(Long cdTipoDeVerificador) {
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
 	}
 	
 	

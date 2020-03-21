@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import br.embrapa.model.CadTipoDeVerificador_;
 import br.embrapa.model.ModMonitoramentoTemplate;
 import br.embrapa.model.ModMonitoramentoTemplate_;
+import br.embrapa.model.Verificador_Local_m_;
 import br.embrapa.repository.filter.ModMonitoramentoTemplateFilter;
 import br.embrapa.repository.projections.ResumoModMonitoramentoTemplate;
 
@@ -47,9 +48,9 @@ public class ModMonitoramentoTemplateRepositoryImpl {
 		Root<ModMonitoramentoTemplate> root = criteria.from(ModMonitoramentoTemplate.class);
 		
 		criteria.select(builder.construct(ResumoModMonitoramentoTemplate.class
-				, root.get(ModMonitoramentoTemplate_.CdTemplate)
-				, root.get(ModMonitoramentoTemplate_.NmTemplate)
-				, root.get(ModMonitoramentoTemplate_.CdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador)));
+				, root.get(ModMonitoramentoTemplate_.cdTemplate)
+				, root.get(ModMonitoramentoTemplate_.nmTemplate)
+				, root.get(ModMonitoramentoTemplate_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador)));
 		
 		
 		Predicate[] predicates = criarRestricoes(modMonitoramentoTemplateFilter, builder, root);
@@ -93,7 +94,16 @@ public class ModMonitoramentoTemplateRepositoryImpl {
 		List<Predicate> predicates = new ArrayList<>();
 		if(!StringUtils.isEmpty(modMonitoramentoTemplateFilter.getNmTemplate())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(ModMonitoramentoTemplate_.NmTemplate)), "%" + modMonitoramentoTemplateFilter.getNmTemplate().toLowerCase() + "%"));
+					builder.lower(root.get(ModMonitoramentoTemplate_.nmTemplate)), "%" + modMonitoramentoTemplateFilter.getNmTemplate().toLowerCase() + "%"));
+		}
+		if (modMonitoramentoTemplateFilter.getCdTemplate() != null) {
+			predicates.add(
+					builder.equal(root.get(ModMonitoramentoTemplate_.cdTemplate), modMonitoramentoTemplateFilter.getCdTemplate()));
+		}
+		
+		if (modMonitoramentoTemplateFilter.getCdTipoDeVerificador() != null) {
+			predicates.add(
+					builder.equal(root.get(ModMonitoramentoTemplate_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador), modMonitoramentoTemplateFilter.getCdTipoDeVerificador()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

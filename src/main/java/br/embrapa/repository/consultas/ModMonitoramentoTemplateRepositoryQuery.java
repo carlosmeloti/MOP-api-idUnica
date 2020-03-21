@@ -13,4 +13,6 @@ public interface ModMonitoramentoTemplateRepositoryQuery {
 	public Page<ModMonitoramentoTemplate> filtrar(ModMonitoramentoTemplateFilter modMonitoramentoTemplateFilter, Pageable pageable);
 	public Page<ResumoModMonitoramentoTemplate> resumir(ModMonitoramentoTemplateFilter modMonitoramentoTemplateFilter, Pageable pageable);
 
+	
+	
 }

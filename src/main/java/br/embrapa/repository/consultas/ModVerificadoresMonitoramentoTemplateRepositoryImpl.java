@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import br.embrapa.dto.TodosOsVerificadores;
 import br.embrapa.model.CadNivelDeAvaliacao_;
+import br.embrapa.model.CadTipoDeVerificador_;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
 import br.embrapa.model.Verificador_m_;
@@ -83,6 +84,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
 	
 		criteria.select(builder.construct(ResumoVerificadoresMonitoramentoTemplate.class
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdTipoVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdVerificador)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.sigla)
