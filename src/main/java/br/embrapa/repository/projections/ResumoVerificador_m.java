@@ -2,66 +2,28 @@ package br.embrapa.repository.projections;
 
 public class ResumoVerificador_m {
 
-	private String codigo;
-	private String nmEmpresa;
-	private String nmTipoVerificador;
-	private String nmnivelavaliacao;
+	private Long codigo;
 	private String codalfa;
-	private String nmverificador;
-	private String limiar;
-	private Double p01_graco;
+	private String sigla;
+	private String nmTipoDeVerificador;
+	private String nmVerificador;
 	
-	
-	public ResumoVerificador_m(String codigo, String nmEmpresa, String nmTipoVerificador, String nmnivelavaliacao,
-			String codalfa, String nmverificador, String limiar, Double p01_graco) {
+		
+	public ResumoVerificador_m(Long codigo, String codalfa, String sigla,String nmTipoDeVerificador, 
+			String nmVerificador) {
 		this.codigo = codigo;
-		this.nmEmpresa = nmEmpresa;
-		this.nmTipoVerificador = nmTipoVerificador;
-		this.nmnivelavaliacao = nmnivelavaliacao;
 		this.codalfa = codalfa;
-		this.nmverificador = nmverificador;
-		this.limiar = limiar;
-		this.p01_graco = p01_graco;
+		this.sigla = sigla;
+		this.nmTipoDeVerificador = nmTipoDeVerificador;
+		this.nmVerificador = nmVerificador;
 	}
-
-
-	public String getCodigo() {
+	
+	
+	public Long getCodigo() {
 		return codigo;
 	}
-
-
-	public void setCodigo(String codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
-	}
-
-
-	public String getNmEmpresa() {
-		return nmEmpresa;
-	}
-
-
-	public void setNmEmpresa(String nmEmpresa) {
-		this.nmEmpresa = nmEmpresa;
-	}
-
-
-	public String getNmTipoVerificador() {
-		return nmTipoVerificador;
-	}
-
-
-	public void setNmTipoVerificador(String nmTipoVerificador) {
-		this.nmTipoVerificador = nmTipoVerificador;
-	}
-
-
-	public String getNmnivelavaliacao() {
-		return nmnivelavaliacao;
-	}
-
-
-	public void setNmnivelavaliacao(String nmnivelavaliacao) {
-		this.nmnivelavaliacao = nmnivelavaliacao;
 	}
 
 
@@ -73,38 +35,38 @@ public class ResumoVerificador_m {
 	public void setCodalfa(String codalfa) {
 		this.codalfa = codalfa;
 	}
-
-
-	public String getNmverificador() {
-		return nmverificador;
-	}
-
-
-	public void setNmverificador(String nmverificador) {
-		this.nmverificador = nmverificador;
-	}
-
-
-	public String getLimiar() {
-		return limiar;
-	}
-
-
-	public void setLimiar(String limiar) {
-		this.limiar = limiar;
-	}
-
-
-	public Double getP01_graco() {
-		return p01_graco;
-	}
-
-
-	public void setP01_graco(Double p01_graco) {
-		this.p01_graco = p01_graco;
-	}
 	
 	
+	public String getSigla() {
+		return sigla;
+	}
+
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+
+
+	public String getNmTipoDeVerificador() {
+		return nmTipoDeVerificador;
+	}
+
+
+	public void setNmTipoDeVerificador(String nmTipoDeVerificador) {
+		this.nmTipoDeVerificador = nmTipoDeVerificador;
+	}
+
+
+	public String getNmVerificador() {
+		return nmVerificador;
+	}
+
+
+	public void setNmVerificador(String nmVerificador) {
+		this.nmVerificador = nmVerificador;
+	}
+
+
 	
 	
 	

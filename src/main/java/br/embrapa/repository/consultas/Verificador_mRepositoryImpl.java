@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.util.StringUtils;
 
 import br.embrapa.model.CadEmpresa_;
+import br.embrapa.model.CadNivelDeAvaliacao_;
 import br.embrapa.model.CadTipoDeVerificador_;
 import br.embrapa.model.Verificador_m;
 import br.embrapa.model.Verificador_m_;
@@ -47,13 +48,11 @@ public class Verificador_mRepositoryImpl implements Verificador_mRepositoryQuery
 		
 		criteria.select(builder.construct(ResumoVerificador_m.class 
 				, root.get(Verificador_m_.codigo)
-				, root.get(Verificador_m_.cdEmpresa).get(CadEmpresa_.nmEmpresa)
-				, root.get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.nmTipoDeVerificador)
-				, root.get(Verificador_m_.cdTipoDeVerificador)
 				, root.get(Verificador_m_.codalfa)
+				, root.get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.sigla)
+				, root.get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.nmTipoDeVerificador)
 				, root.get(Verificador_m_.nmverificador)
-				, root.get(Verificador_m_.limiar) 
-				, root.get(Verificador_m_.p01_graco)));
+				));
 		
 		
 		Predicate[] predicates = criarRestricoes(verificardor_mFilter, builder, root);
