@@ -5,8 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -16,12 +18,16 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.embrapa.dto.TodosOsVerificadores;
+import br.embrapa.event.RecursoCriadoEvent;
+import br.embrapa.model.ModMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.repository.ModVerificadoresMonitoramentoTemplateRepository;
 import br.embrapa.repository.consultas.ModVerificadoresMonitoramentoTemplateRepositoryImpl;
@@ -49,6 +55,8 @@ public class ModVerificadoresMonitoramentoTemplateResource {
 	
 	@Autowired
 	private ModVerificadoresMonitoramentoTemplateRepositoryImpl d;
+	@Autowired
+	private ApplicationEventPublisher publisher;
 	
 	
 	@GetMapping
@@ -82,6 +90,15 @@ public class ModVerificadoresMonitoramentoTemplateResource {
 		ModVerificadoresMonitoramentoTemplate modVerificadoresMonitoramentoTemplate = modVerificadoresMonitoramentoTemplateRepository.findOne(codigo);
 		return modVerificadoresMonitoramentoTemplate != null ? ResponseEntity.ok(modVerificadoresMonitoramentoTemplate) : ResponseEntity.notFound().build();
 		
+	}
+	
+	@PostMapping
+	public ResponseEntity<ModVerificadoresMonitoramentoTemplate> criar(@RequestBody ModVerificadoresMonitoramentoTemplate modVerificadoresMonitoramentoTemplate, HttpServletResponse response) {
+		ModVerificadoresMonitoramentoTemplate modVerificadoresMonitoramentoTemplateSalva = modVerificadoresMonitoramentoTemplateRepository.save(modVerificadoresMonitoramentoTemplate);
+		
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, modVerificadoresMonitoramentoTemplateSalva.getCdVeriMod()));
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(modVerificadoresMonitoramentoTemplateSalva);
 	}
 	
 	@DeleteMapping("/{codigo}")

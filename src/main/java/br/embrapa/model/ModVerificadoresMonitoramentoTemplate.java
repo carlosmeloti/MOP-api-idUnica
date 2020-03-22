@@ -29,7 +29,7 @@ public class ModVerificadoresMonitoramentoTemplate {
 	
 	@ManyToOne
 	@JoinColumn(name="r17_cdtipoverificador")
-	private CadTipoDeVerificador cdTipoVerificador;
+	private CadTipoDeVerificador cdTipoDeVerificador;
 	
 	@ManyToOne
 	@JoinColumn(name="r17_cdtemplate", referencedColumnName="d14_cdtemplate")
@@ -90,12 +90,12 @@ public class ModVerificadoresMonitoramentoTemplate {
 		this.cdVerificador = cdVerificador;
 	}
 
-	public CadTipoDeVerificador getCdTipoVerificador() {
-		return cdTipoVerificador;
+	public CadTipoDeVerificador getCdTipoDeVerificador() {
+		return cdTipoDeVerificador;
 	}
 
-	public void setCdTipoVerificador(CadTipoDeVerificador cdTipoVerificador) {
-		this.cdTipoVerificador = cdTipoVerificador;
+	public void setCdTipoVerificador(CadTipoDeVerificador cdTipoDeVerificador) {
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
 	}
 
 	

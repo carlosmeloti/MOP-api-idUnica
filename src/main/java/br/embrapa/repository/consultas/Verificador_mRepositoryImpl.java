@@ -48,6 +48,7 @@ public class Verificador_mRepositoryImpl implements Verificador_mRepositoryQuery
 		
 		criteria.select(builder.construct(ResumoVerificador_m.class 
 				, root.get(Verificador_m_.codigo)
+				, root.get(Verificador_m_.cdVerificador)
 				, root.get(Verificador_m_.codalfa)
 				, root.get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.sigla)
 				, root.get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.nmTipoDeVerificador)
