@@ -1,5 +1,6 @@
 package br.embrapa.resource;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -82,7 +83,18 @@ public class ModVerificadoresMonitoramentoTemplateResource {
 	}
 	
 	
-		
+	@SuppressWarnings("unchecked")
+	@GetMapping("/count")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_VERIFICADOR_M') and #oauth2.hasScope('read')")
+	public BigInteger count(Long cdTemplate) {
+		Query query = em.createNativeQuery("select count(*) from r17_verificador_template_m  WHERE r17_cdtemplate =:cdTemplate");
+		query.setParameter("cdTemplate", cdTemplate);
+		BigInteger result = (BigInteger) query.getSingleResult();
+		//BigInteger result = resultList.get(0);
+        return result;
+	}
+	
+			
 	
 	@GetMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_VERIFICADOR_M') and #oauth2.hasScope('read')")

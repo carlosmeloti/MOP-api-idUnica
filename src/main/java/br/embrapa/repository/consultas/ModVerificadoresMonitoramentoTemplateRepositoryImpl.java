@@ -23,6 +23,7 @@ import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
 import br.embrapa.model.Verificador_m_;
 import br.embrapa.repository.filter.ModVerificadoresMonitoramentoTemplateFilter;
+import br.embrapa.repository.projections.CountVerificadores;
 import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplate;
 import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplateTeste;
 
@@ -51,12 +52,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		criteriaQuery.where(
 				criteriaBuilder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdTemplate), 
 						cdTemplate));
-		
-		/*
-		 * criteriaQuery.groupBy(root.get(Lancamento_.tipo),
-		 * root.get(Lancamento_.pessoa));
-		 */
-		
+	
 		TypedQuery<TodosOsVerificadores> typedQuery = manager
 				.createQuery(criteriaQuery);
 		
@@ -77,6 +73,9 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		return new PageImpl<>(query.getResultList(), pageable, total(modVerificadoresMonitoramentoTemplateFilter));
 	}
 	
+
+	
+	
 	public List<ResumoVerificadoresMonitoramentoTemplate> resumir(
 			ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
 		CriteriaBuilder builder = manager .getCriteriaBuilder();
@@ -84,6 +83,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
 	
 		criteria.select(builder.construct(ResumoVerificadoresMonitoramentoTemplate.class
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVeriMod)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdVerificador)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
@@ -98,6 +98,9 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		TypedQuery<ResumoVerificadoresMonitoramentoTemplate> query = manager.createQuery(criteria);
 		return query.getResultList();
 	}
+	
+	
+	
 	
 
 	private void adiconarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
@@ -154,6 +157,8 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		criteria.select(builder.count(root));
 		return manager.createQuery(criteria).getSingleResult();
 	}
+
+	
 
 
 

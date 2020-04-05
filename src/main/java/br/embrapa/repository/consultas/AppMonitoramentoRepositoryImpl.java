@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import br.embrapa.model.AppMonitoramento;
 import br.embrapa.model.AppMonitoramento_;
+import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
 import br.embrapa.repository.filter.AppMonitoramentoFilter;
 
 
@@ -91,6 +92,10 @@ public class AppMonitoramentoRepositoryImpl implements AppMonitoramentoRepositor
 		if(!StringUtils.isEmpty(appMonitoramentoFilter.getNmMonitoramento())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(AppMonitoramento_.nmMonitoramento)), "%" + appMonitoramentoFilter.getNmMonitoramento().toLowerCase() + "%"));
+		}
+		if (appMonitoramentoFilter.getCdTemplate() != null) {
+			predicates.add(
+					builder.equal(root.get(AppMonitoramento_.cdTemplate), appMonitoramentoFilter.getCdTemplate()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
