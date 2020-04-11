@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,19 +27,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.embrapa.dto.TodosOsVerificadores;
 import br.embrapa.event.RecursoCriadoEvent;
-import br.embrapa.model.ModMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.repository.ModVerificadoresMonitoramentoTemplateRepository;
 import br.embrapa.repository.consultas.ModVerificadoresMonitoramentoTemplateRepositoryImpl;
-import br.embrapa.repository.filter.CadFrequenciaFilter;
 import br.embrapa.repository.filter.ModVerificadoresMonitoramentoTemplateFilter;
-import br.embrapa.repository.projections.ResumoCadFrequencia;
 import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplate;
-import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplateTeste;
 import br.embrapa.service.ModVerificadoresMonitoramentoTemplateService;
-import org.springframework.http.MediaType;
 
 
 @RestController
@@ -90,8 +85,7 @@ public class ModVerificadoresMonitoramentoTemplateResource {
 		Query query = em.createNativeQuery("select count(*) from r17_verificador_template_m  WHERE r17_cdtemplate =:cdTemplate");
 		query.setParameter("cdTemplate", cdTemplate);
 		BigInteger result = (BigInteger) query.getSingleResult();
-		//BigInteger result = resultList.get(0);
-        return result;
+		return result;
 	}
 	
 			
