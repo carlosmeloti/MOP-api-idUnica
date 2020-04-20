@@ -6,6 +6,8 @@ public class ModVerificadoresMonitoramentoTemplateFilter {
 	
 	private Long cdEmpresa;
 	
+	private Long cdTipoDeVerificador;
+	
 	private String nmVerificador;
 	
 	private Long cdTemplate;
@@ -22,6 +24,16 @@ public class ModVerificadoresMonitoramentoTemplateFilter {
 
 	public void setCdEmpresa(Long cdEmpresa) {
 		this.cdEmpresa = cdEmpresa;
+	}
+	
+	
+
+	public Long getCdTipoDeVerificador() {
+		return cdTipoDeVerificador;
+	}
+
+	public void setCdTipoDeVerificador(Long cdTipoDeVerificador) {
+		this.cdTipoDeVerificador = cdTipoDeVerificador;
 	}
 
 	public Long getCdVeriMod() {

@@ -4,16 +4,18 @@ public class ResumoVerificadoresMonitoramentoTemplate {
 	
 	private Long cdVeriMod;
 	private Long cdTipoDeVerificador;
+	private Long cdTemplate;
 	private Long cdVerificador;
 	private String codalfa;
 	private String sigla;
 	private String nmVerificador;
 
 	public ResumoVerificadoresMonitoramentoTemplate(Long cdVeriMod, Long cdTipoDeVerificador, 
-			Long cdVerificador, String codalfa, String sigla, String nmVerificador) {
+			Long cdTemplate, Long cdVerificador, String codalfa, String sigla, String nmVerificador) {
 		
 		this.cdVeriMod = cdVerificador;
 		this.cdTipoDeVerificador = cdTipoDeVerificador;
+		this.cdTemplate = cdTemplate;
 		this.cdVerificador = cdVerificador;
 		this.codalfa = codalfa;
 		this.sigla = sigla;
@@ -42,6 +44,19 @@ public class ResumoVerificadoresMonitoramentoTemplate {
 
 	public void setCdTipoDeVerificador(Long cdTipoDeVerificador) {
 		this.cdTipoDeVerificador = cdTipoDeVerificador;
+	}
+
+	
+
+
+	public Long getCdTemplate() {
+		return cdTemplate;
+	}
+
+
+
+	public void setCdTemplate(Long cdTemplate) {
+		this.cdTemplate = cdTemplate;
 	}
 
 

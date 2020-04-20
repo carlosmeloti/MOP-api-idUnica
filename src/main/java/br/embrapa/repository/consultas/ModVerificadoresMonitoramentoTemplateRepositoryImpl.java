@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import br.embrapa.dto.TodosOsVerificadores;
 import br.embrapa.model.CadNivelDeAvaliacao_;
 import br.embrapa.model.CadTipoDeVerificador_;
+import br.embrapa.model.ModMonitoramentoTemplate_;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
 import br.embrapa.model.ModVerificadoresMonitoramentoTemplate_;
 import br.embrapa.model.Verificador_m_;
@@ -76,15 +77,16 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 
 	
 	
-	public List<ResumoVerificadoresMonitoramentoTemplate> resumir(
-			ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter) {
+	public 	Page<ResumoVerificadoresMonitoramentoTemplate> resumir(
+			ModVerificadoresMonitoramentoTemplateFilter modVerificadoresMonitoramentoTemplateFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager .getCriteriaBuilder();
 		CriteriaQuery<ResumoVerificadoresMonitoramentoTemplate> criteria = builder.createQuery(ResumoVerificadoresMonitoramentoTemplate.class);
 		Root<ModVerificadoresMonitoramentoTemplate> root = criteria.from(ModVerificadoresMonitoramentoTemplate.class);
 	
 		criteria.select(builder.construct(ResumoVerificadoresMonitoramentoTemplate.class
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVeriMod)
-				, root.get(ModVerificadoresMonitoramentoTemplate_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador)
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador)
+				, root.get(ModVerificadoresMonitoramentoTemplate_.cdTemplate).get(ModMonitoramentoTemplate_.cdTemplate)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdVerificador)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.codalfa)
 				, root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cadNivelDeAvaliacao).get(CadNivelDeAvaliacao_.sigla)
@@ -96,7 +98,9 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		criteria.where(predicates);
 		
 		TypedQuery<ResumoVerificadoresMonitoramentoTemplate> query = manager.createQuery(criteria);
-		return query.getResultList();
+		adiconarRestricoesDePaginacao(query, pageable);
+		
+		return new PageImpl<>(query.getResultList(), pageable, total(modVerificadoresMonitoramentoTemplateFilter));
 	}
 	
 	
@@ -118,7 +122,12 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 		List<Predicate> predicates = new ArrayList<>();
 		if (modVerificadoresMonitoramentoTemplateFilter.getCdTemplate() != null) {
 			predicates.add(
-					builder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdTemplate), modVerificadoresMonitoramentoTemplateFilter.getCdTemplate()));
+					builder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdTemplate).get(ModMonitoramentoTemplate_.cdTemplate), modVerificadoresMonitoramentoTemplateFilter.getCdTemplate()));
+		}
+		
+		if (modVerificadoresMonitoramentoTemplateFilter.getCdTipoDeVerificador() != null) {
+			predicates.add(
+					builder.equal(root.get(ModVerificadoresMonitoramentoTemplate_.cdVerificador).get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador), modVerificadoresMonitoramentoTemplateFilter.getCdTipoDeVerificador()));
 		}
 		
 		if (modVerificadoresMonitoramentoTemplateFilter.getCdEmpresa() != null) {

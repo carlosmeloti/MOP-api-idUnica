@@ -20,8 +20,8 @@ public interface ModVerificadoresMonitoramentoTemplateRepositoryQuery {
 	public Page<ModVerificadoresMonitoramentoTemplate> filtrar(ModVerificadoresMonitoramentoTemplateFilter 
 			modVerificadoresMonitoramentoTemplateFilter, Pageable pageable);
 	
-	public List<ResumoVerificadoresMonitoramentoTemplate> resumir(ModVerificadoresMonitoramentoTemplateFilter 
-				modVerificadoresMonitoramentoTemplateFilter);
+	public Page<ResumoVerificadoresMonitoramentoTemplate> resumir(ModVerificadoresMonitoramentoTemplateFilter 
+				modVerificadoresMonitoramentoTemplateFilter, Pageable pageable);
 	
 	
 }
