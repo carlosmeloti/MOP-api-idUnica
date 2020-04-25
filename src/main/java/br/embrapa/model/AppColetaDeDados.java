@@ -11,11 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="p21_coleta")
-public class AppColetaDeDaDos {
+public class AppColetaDeDados {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="p21_cdColetaDeDados") 
+	@Column(name="p21_cdcoletadedados")  
 	private Long cdColetaDeDaDos;
 	
 	@ManyToOne
@@ -23,14 +23,22 @@ public class AppColetaDeDaDos {
 	private CadEmpresa cdEmpresa;
 	
 	@ManyToOne
-	@JoinColumn(name="p21_cdtipoverificador")
+	@JoinColumn(name="p21_id_Verificador_m", referencedColumnName="p01_id_Verificador_m")
+	private Verificador_m id_Verificador_m;
+	
+	@ManyToOne
+	@JoinColumn(name="p21_cdtipoverificador", referencedColumnName ="d02_cdtipoverificador")
 	private CadTipoDeVerificador cdTipoDeVerificador;
 	
 	@ManyToOne
-	@JoinColumn(name="d19_cdavaliacao")
+	@JoinColumn(name="p21_cdmonitoramento", referencedColumnName = "d18_cdmonitoramento")
+	private AppMonitoramento cdMonitoramento;
+	
+	@ManyToOne
+	@JoinColumn(name="p21_cdavaliacao", referencedColumnName = "d19_cdavaliacao")
 	private AppAvaliacao cdAvaliacao;
 	
-	@Column(name="p21_nrobservacoes]")
+	@Column(name="p21_nrobservacoes")
 	private Integer nrObservacoes;
 	
 	@Column(name="p21_nrnaoconf")
@@ -59,6 +67,18 @@ public class AppColetaDeDaDos {
 	}
 	public AppAvaliacao getCdAvaliacao() {
 		return cdAvaliacao;
+	}
+	public Verificador_m getId_Verificador_m() {
+		return id_Verificador_m;
+	}
+	public void setId_Verificador_m(Verificador_m id_Verificador_m) {
+		this.id_Verificador_m = id_Verificador_m;
+	}
+	public AppMonitoramento getCdMonitoramento() {
+		return cdMonitoramento;
+	}
+	public void setCdMonitoramento(AppMonitoramento cdMonitoramento) {
+		this.cdMonitoramento = cdMonitoramento;
 	}
 	public void setCdAvaliacao(AppAvaliacao cdAvaliacao) {
 		this.cdAvaliacao = cdAvaliacao;
@@ -96,7 +116,7 @@ public class AppColetaDeDaDos {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AppColetaDeDaDos other = (AppColetaDeDaDos) obj;
+		AppColetaDeDados other = (AppColetaDeDados) obj;
 		if (cdColetaDeDaDos == null) {
 			if (other.cdColetaDeDaDos != null)
 				return false;
