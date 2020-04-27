@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import br.embrapa.model.CadAmostragem_;
 import br.embrapa.model.CadMaterial;
 import br.embrapa.model.CadMaterial_;
 import br.embrapa.repository.filter.CadMaterialFilter;
@@ -89,6 +90,10 @@ public class CadMaterialRepositoryImpl implements CadMaterialRepositoryQuery {
 		if(!StringUtils.isEmpty(cadMaterialFilter.getNmmaterial())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(CadMaterial_.nmMaterial)), "%" + cadMaterialFilter.getNmmaterial().toLowerCase() + "%"));
+		}
+		if (cadMaterialFilter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(CadMaterial_.cdEmpresa), cadMaterialFilter.getCdEmpresa()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

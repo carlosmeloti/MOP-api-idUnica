@@ -1,7 +1,11 @@
 package br.embrapa.resource;
 
+import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -32,6 +36,8 @@ import br.embrapa.service.MenuEmpresaService;
 @RequestMapping("/menuempresa")
 public class MenuEmpresaResource {
 
+	@PersistenceContext
+	private EntityManager em;
 	
 	@Autowired
 	private MenuEmpresaRepository menuEmpresaRepository;
@@ -50,19 +56,14 @@ public class MenuEmpresaResource {
 		return menuEmpresaRepository.filtrar(menuEmpresaFilter, pageable);
 	}
 	
-	/*
-	 * @GetMapping("/empresaselecionada")
-	 * 
-	 * @PreAuthorize("hasAuthority('ROLE_PESQUISAR_EMPRESA') and #oauth2.hasScope('read')"
-	 * ) public List<MenuEmpresa> recuperarEmpresSelecionada(){
-	 * 
-	 * MenuEmpresa m = new MenuEmpresa();
-	 * 
-	 * m.
-	 * 
-	 * 
-	 * return menuEmpresaRepository.recuperarEmpresSelecionada(); }
-	 */
+	@SuppressWarnings("unchecked")
+	@GetMapping("/empresaselecionada")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_VERIFICADOR_M') and #oauth2.hasScope('read')")
+	public BigInteger count(Long cdTemplate) {
+		Query query = em.createNativeQuery("select cdempresa from menu_empresa where id = (select max(id) from menu_empresa);");
+		BigInteger result = (BigInteger) query.getSingleResult();
+		return result;
+	}
 	
 		
 	@PostMapping

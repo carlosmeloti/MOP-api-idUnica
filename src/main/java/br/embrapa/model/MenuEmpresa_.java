@@ -9,7 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class MenuEmpresa_ {
 
 	public static volatile SingularAttribute<MenuEmpresa, Long> cdEmpresa;
-	public static volatile SingularAttribute<MenuEmpresa, String> nmEmpresa;
+	public static volatile SingularAttribute<MenuEmpresa, Long> id;
 
 }
 

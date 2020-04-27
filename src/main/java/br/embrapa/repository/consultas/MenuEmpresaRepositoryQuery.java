@@ -12,7 +12,8 @@ public interface MenuEmpresaRepositoryQuery {
 	
 	public Page<MenuEmpresa> filtrar(MenuEmpresaFilter menuEmpresaFilter, Pageable pageable);
 
-	List<MenuEmpresa> recuperarEmpresSelecionada();
+	
+	//List<MenuEmpresa> recuperarEmpresSelecionada();
 	
 
 

@@ -12,48 +12,39 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="menu_empresa")
-/*
- * @NamedNativeQuery( name = "recuperarEmpresSelecionada", query =
- * "select * from menu_empresa", resultClass=MenuEmpresa.class )
- */
 public class MenuEmpresa implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private Long id;
+	
 	@Column(name="cdempresa")
 	private Long cdEmpresa;
-	
-	@Column(name="nmempresa")
-	private String nmEmpresa;
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Long getCdEmpresa() {
 		return cdEmpresa;
 	}
 
-	public void setCdEmprsa(Long cdEmpresa) {
+	public void setCdEmpresa(Long cdEmpresa) {
 		this.cdEmpresa = cdEmpresa;
-	}
-	
-	
-
-	public String getNmEmpresa() {
-		return nmEmpresa;
-	}
-
-	public void setNmEmpresa(String nmEmpresa) {
-		this.nmEmpresa = nmEmpresa;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cdEmpresa == null) ? 0 : cdEmpresa.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -66,13 +57,15 @@ public class MenuEmpresa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		MenuEmpresa other = (MenuEmpresa) obj;
-		if (cdEmpresa == null) {
-			if (other.cdEmpresa != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!cdEmpresa.equals(other.cdEmpresa))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	} 
+	}
+
+	
 	
 	
 

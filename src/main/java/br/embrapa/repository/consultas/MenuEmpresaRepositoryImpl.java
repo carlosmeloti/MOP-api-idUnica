@@ -26,13 +26,7 @@ public class MenuEmpresaRepositoryImpl implements MenuEmpresaRepositoryQuery {
 	private EntityManager manager;
 	
 	
-	public List<MenuEmpresa> recuperarEmpresSelecionada() {
-	    List<MenuEmpresa> empresas = manager.createNamedQuery("recuperarEmpresSelecionada", MenuEmpresa.class)
-	                                            .getResultList();
-	    return empresas;
-	}
-
-	
+		
 	@Override
 	public Page<MenuEmpresa> filtrar(MenuEmpresaFilter menuEmpresaFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
@@ -75,10 +69,11 @@ public class MenuEmpresaRepositoryImpl implements MenuEmpresaRepositoryQuery {
 	private Predicate[] criarRestricoes(MenuEmpresaFilter menuEmpresaFilter, CriteriaBuilder builder,
 			Root<MenuEmpresa> root) {
 		List<Predicate> predicates = new ArrayList<>();
-		if(!StringUtils.isEmpty(menuEmpresaFilter.getNmEmpresa())) {
-			predicates.add(builder.like(
-					builder.lower(root.get(MenuEmpresa_.nmEmpresa)), "%" + menuEmpresaFilter.getNmEmpresa().toLowerCase() + "%"));
-		}
+		/*
+		 * if(!StringUtils.isEmpty(menuEmpresaFilter.getNmEmpresa())) {
+		 * predicates.add(builder.like( builder.lower(root.get(MenuEmpresa_.nmEmpresa)),
+		 * "%" + menuEmpresaFilter.getNmEmpresa().toLowerCase() + "%")); }
+		 */
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
