@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import br.embrapa.model.CadMaterial_;
 import br.embrapa.model.ModLocal1;
 import br.embrapa.model.ModLocal1_;
 import br.embrapa.repository.filter.ModLocal1Filter;
@@ -99,6 +100,10 @@ public class ModLocal1RepositoryImpl {
 		if(!StringUtils.isEmpty(modLocal1Filter.getNmlocal1())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(ModLocal1_.nmlocal1)), "%" + modLocal1Filter.getNmlocal1().toLowerCase() + "%"));
+		}
+		if (modLocal1Filter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(ModLocal1_.cdEmpresa), modLocal1Filter.getCdEmpresa()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

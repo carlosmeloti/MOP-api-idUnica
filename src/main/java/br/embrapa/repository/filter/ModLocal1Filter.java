@@ -4,6 +4,17 @@ public class ModLocal1Filter {
 	
 	
 	private String nmlocal1;
+	private Long cdEmpresa;
+	
+	
+
+	public Long getCdEmpresa() {
+		return cdEmpresa;
+	}
+
+	public void setCdEmpresa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
+	}
 
 	public String getNmlocal1() {
 		return nmlocal1;

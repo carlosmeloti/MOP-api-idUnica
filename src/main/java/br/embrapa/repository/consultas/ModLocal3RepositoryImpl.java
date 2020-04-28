@@ -99,6 +99,10 @@ public class ModLocal3RepositoryImpl {
 			predicates.add(
 					builder.equal(root.get(ModLocal3_.cdLocal2).get(ModLocal2_.cdLocal2), modLocal3Filter.getCdLocal2()));
 }
+		if (modLocal3Filter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(ModLocal3_.cdEmpresa), modLocal3Filter.getCdEmpresa()));
+		}
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

@@ -7,6 +7,7 @@ public class ModLocal3Filter {
 	private Long cdLocal2;
 	private String nmLocal1;
 	private Long cdLocal1;
+	private Long cdEmpresa;
 	
 	
 	public String getNmLocal3() {
@@ -39,6 +40,14 @@ public class ModLocal3Filter {
 	public void setCdLocal1(Long cdLocal1) {
 		this.cdLocal1 = cdLocal1;
 	}
+	public Long getCdEmpresa() {
+		return cdEmpresa;
+	}
+	public void setCdEmpresa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
+	}
+	
+	
 	
 	
 	
