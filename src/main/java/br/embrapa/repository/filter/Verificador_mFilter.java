@@ -6,6 +6,7 @@ public class Verificador_mFilter {
 	private Long cdVerificador;
 	private Long cdTipoDeVerificador;
 	private Long codigo;
+	private Long cdEmpresa;
 	
 	
 	public Long getCodigo() {
@@ -32,7 +33,14 @@ public class Verificador_mFilter {
 	public void setCdTipoDeVerificador(Long cdTipoDeVerificador) {
 		this.cdTipoDeVerificador = cdTipoDeVerificador;
 	}
+	public Long getCdEmpresa() {
+		return cdEmpresa;
+	}
+	public void setCdEmpresa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
+	}
 
+	
 	
 	
 	

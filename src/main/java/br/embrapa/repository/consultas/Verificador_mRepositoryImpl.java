@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 import br.embrapa.model.CadEmpresa_;
 import br.embrapa.model.CadNivelDeAvaliacao_;
 import br.embrapa.model.CadTipoDeVerificador_;
+import br.embrapa.model.ModLocal3_;
 import br.embrapa.model.Verificador_m;
 import br.embrapa.model.Verificador_m_;
 import br.embrapa.repository.filter.Verificador_mFilter;
@@ -78,23 +79,10 @@ public class Verificador_mRepositoryImpl implements Verificador_mRepositoryQuery
 					builder.equal(root.get(Verificador_m_.cdTipoDeVerificador).get(CadTipoDeVerificador_.cdTipoDeVerificador), verificador_mFilter.getCdTipoDeVerificador()));
 		} 
 		
-		
-		/*
-		 * if(!StringUtils.isEmpty(verificador_mFilter.getNmTipoDeVerificador())) {
-		 * predicates.add(builder.like(
-		 * builder.lower(root.get(Verificador_m_.cdTipoDeVerificador).get(
-		 * CadTipoDeVerificador_.nmTipoDeVerificador)), "%" +
-		 * verificador_mFilter.getNmTipoDeVerificador().toLowerCase() + "%")); }
-		 */
-		
-		/*
-			 * if (verificador_mFilter.getCdTipoDeVerificador() != null) { predicates.add(
-			 * builder.equal(root.get(Verificador_m_.cdVerificador),
-			 * verificador_mFilter.getCdVerificador())); } if
-			 * (verificador_mFilter.getCodigo() != null) { predicates.add(
-			 * builder.equal(root.get(Verificador_m_.codigo),
-			 * verificador_mFilter.getCodigo())); }
-			 */
+		if (verificador_mFilter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(Verificador_m_.cdEmpresa), verificador_mFilter.getCdEmpresa()));
+		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
