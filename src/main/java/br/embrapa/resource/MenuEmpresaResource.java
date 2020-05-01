@@ -65,6 +65,15 @@ public class MenuEmpresaResource {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@GetMapping("/empresaselecionadanome")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_VERIFICADOR_M') and #oauth2.hasScope('read')")
+	public String nomeEmpresa(Long cdTemplate) {
+		Query query = em.createNativeQuery("select d24_nmempresa from d24_empresa where d24_cdempresa = (select cdempresa from menu_empresa where id = (select max(id) from menu_empresa));");
+		String result = (String) query.getSingleResult();
+		return result;
+	}
+	
 		
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_EMPRESA') and #oauth2.hasScope('write')")
