@@ -9,6 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class ModNivel4_ {
 
 	public static volatile SingularAttribute<ModNivel4, String> nmNivel4;
+	public static volatile SingularAttribute<ModNivel4, CadEmpresa> cdEmpresa;
 	public static volatile SingularAttribute<ModNivel4, ModNivel1> cdNivel1;
 	public static volatile SingularAttribute<ModNivel4, ModNivel2> cdNivel2;
 	public static volatile SingularAttribute<ModNivel4, ModNivel3> cdNivel3;

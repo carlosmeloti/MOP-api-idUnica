@@ -9,6 +9,15 @@ public class ModNivel4Filter {
 	private Long cdNivel3;
 	private Long cdNivel2;
 	private Long cdNivel1;
+    private Long cdEmpresa;
+	
+	
+	public Long getCdEmpresa() {
+		return cdEmpresa;
+	}
+	public void setCdEmpresa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
+	}
 	
 	public String getNmNivel4() {
 		return nmNivel4;

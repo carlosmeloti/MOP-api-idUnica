@@ -20,6 +20,10 @@ public class ModNivel4 {
 	private Long cdNivel4;
 	
 	@ManyToOne
+	@JoinColumn(name="d13_cdempresa", referencedColumnName="d24_cdempresa")
+	private CadEmpresa cdEmpresa; 
+	
+	@ManyToOne
 	@JoinColumn(name="d13_cdnivel1", referencedColumnName="d10_cdnivel1")
 	private ModNivel1 cdNivel1;
 	

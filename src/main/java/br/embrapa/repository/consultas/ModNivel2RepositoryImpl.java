@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import br.embrapa.model.ModLocal1_;
 import br.embrapa.model.ModNivel1_;
 import br.embrapa.model.ModNivel2;
 import br.embrapa.model.ModNivel2_;
@@ -98,10 +99,10 @@ public class ModNivel2RepositoryImpl {
 			predicates.add(
 					builder.equal(root.get(ModNivel2_.cdNivel1).get(ModNivel1_.cdNivel1), modNivel2Filter.getCdNivel1()));
 		}
-		/*if (modNivel2Filter.getCdEmpresa() != null) {
+		if (modNivel2Filter.getCdEmpresa() != null) {
 			predicates.add(
-					builder.equal(root.get(ModLocal2_.pkLocal2).get(ModLocal2_PK_.modLocal1).get(ModLocal1_.pkLocal1).get(ModLocal1_PK_.cdEmpresa), modLocal2Filter.getCdEmpresa()));
-		}*/
+					builder.equal(root.get(ModNivel2_.cdEmpresa), modNivel2Filter.getCdEmpresa()));
+		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

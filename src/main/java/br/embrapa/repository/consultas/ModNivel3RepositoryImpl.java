@@ -105,6 +105,10 @@ public class ModNivel3RepositoryImpl {
 			predicates.add(
 			builder.equal(root.get(ModNivel3_.cdNivel2).get(ModNivel2_.cdNivel2), modNivel3Filter.getCdNivel2()));
 		}
+		if (modNivel3Filter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(ModNivel3_.cdEmpresa), modNivel3Filter.getCdEmpresa()));
+		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
