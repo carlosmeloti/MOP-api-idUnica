@@ -67,7 +67,7 @@ public class ModNivel3Resource {
 			
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long codigo, @PathVariable CadEmpresa cdEmpresa) {
+	public void remover(@PathVariable Long codigo) {
 		modNivel3Repository.delete(codigo);
 	}
 	

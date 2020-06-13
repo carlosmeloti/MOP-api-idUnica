@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import br.embrapa.model.ModNivel1;
 import br.embrapa.model.ModNivel1_;
+import br.embrapa.model.ModNivel2_;
 import br.embrapa.repository.filter.ModNivel1Filter;
 
 
@@ -65,9 +66,14 @@ public class ModNivel1RepositoryImpl {
 	private Predicate[] criarRestricoes(ModNivel1Filter modNivel1Filter, CriteriaBuilder builder,
 			Root<ModNivel1> root) {
 		List<Predicate> predicates = new ArrayList<>();
+		
 		if(!StringUtils.isEmpty(modNivel1Filter.getNmNivel1())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(ModNivel1_.nmNivel1)), "%" + modNivel1Filter.getNmNivel1().toLowerCase() + "%"));
+		}
+		if (modNivel1Filter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(ModNivel1_.cdEmpresa), modNivel1Filter.getCdEmpresa()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
