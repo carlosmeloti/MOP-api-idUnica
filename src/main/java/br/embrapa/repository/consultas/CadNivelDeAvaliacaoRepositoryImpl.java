@@ -66,7 +66,7 @@ public class CadNivelDeAvaliacaoRepositoryImpl implements CadNivelDeAvaliacaoRep
 	
 	private void adiconarRestricoesDePaginacao(TypedQuery<CadNivelDeAvaliacao> query, Pageable pageable) {
 		int paginaAtual = pageable.getPageNumber();
-		int totalDeRegistrosPorPagina = pageable.getPageSize();
+		int totalDeRegistrosPorPagina = 1000;
 		int primeiroRegistroDaPagina = paginaAtual * totalDeRegistrosPorPagina;
 		
 		query.setFirstResult(primeiroRegistroDaPagina);

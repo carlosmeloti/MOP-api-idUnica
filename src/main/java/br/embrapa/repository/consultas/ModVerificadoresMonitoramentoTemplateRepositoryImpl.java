@@ -109,7 +109,7 @@ public class ModVerificadoresMonitoramentoTemplateRepositoryImpl implements ModV
 
 	private void adiconarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
 		int paginaAtual = pageable.getPageNumber();
-		int totalDeRegistrosPorPagina = 100;//pageable.getPageSize();
+		int totalDeRegistrosPorPagina = 1000;//pageable.getPageSize();
 		int primeiroRegistroDaPagina = paginaAtual * totalDeRegistrosPorPagina;
 		
 		query.setFirstResult(primeiroRegistroDaPagina);

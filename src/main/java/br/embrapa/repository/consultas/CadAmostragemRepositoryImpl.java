@@ -67,7 +67,7 @@ public class CadAmostragemRepositoryImpl implements CadAmostragemRepositoryQuery
 
 	private void adiconarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
 		int paginaAtual = pageable.getPageNumber();
-		int totalDeRegistrosPorPagina = pageable.getPageSize();
+		int totalDeRegistrosPorPagina = 1000;
 		int primeiroRegistroDaPagina = paginaAtual * totalDeRegistrosPorPagina;
 		
 		query.setFirstResult(primeiroRegistroDaPagina);
