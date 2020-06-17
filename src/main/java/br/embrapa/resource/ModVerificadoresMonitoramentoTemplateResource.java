@@ -68,7 +68,7 @@ public class ModVerificadoresMonitoramentoTemplateResource {
 		return modVerificadoresMonitoramentoTemplateRepository.resumir(modVerificadoresMonitoramentoTemplateFilter, pageable );
 	}
 	
-	@GetMapping("/teste")
+	@GetMapping("/relatorio")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CADFREQUENCIA') and #oauth2.hasScope('read')")
 	public ResponseEntity<byte[]> todosVerificadores(@RequestParam Long cdTemplate) throws Exception {
 		byte[] relatorio = modVerificadoresMonitoramentoTemplateService.todosVerificadores(cdTemplate);

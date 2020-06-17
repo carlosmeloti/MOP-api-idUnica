@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import br.embrapa.model.AppAvaliacao;
 import br.embrapa.model.AppAvaliacao_;
 import br.embrapa.model.AppMonitoramento_;
+import br.embrapa.model.CadAmostragem_;
 import br.embrapa.repository.filter.AppAvaliacaoFilter;
 
 public class AppAvaliacaoRepositoryImpl implements AppAvaliacaoRepositoryQuery {
@@ -82,6 +83,10 @@ public class AppAvaliacaoRepositoryImpl implements AppAvaliacaoRepositoryQuery {
 		if (appAvaliacaoFilter.getCdMonitoramento() != null) {
 			predicates.add(
 					builder.equal(root.get(AppAvaliacao_.cdMonitoramento), appAvaliacaoFilter.getCdMonitoramento()));
+		}
+		if (appAvaliacaoFilter.getCdEmpresa() != null) {
+			predicates.add(
+					builder.equal(root.get(AppAvaliacao_.cdEmpresa), appAvaliacaoFilter.getCdEmpresa()));
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

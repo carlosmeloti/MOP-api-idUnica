@@ -5,6 +5,17 @@ public class AppAvaliacaoFilter {
 	private String nmAvaliacao;
 	private String nmMonitoramento;
 	private Long cdMonitoramento;
+	private Long cdEmpresa;
+	
+	
+
+	public Long getCdEmpresa() {
+		return cdEmpresa;
+	}
+
+	public void setCdEmpresa(Long cdEmpresa) {
+		this.cdEmpresa = cdEmpresa;
+	}
 
 	public String getNmAvaliacao() {
 		return nmAvaliacao;
