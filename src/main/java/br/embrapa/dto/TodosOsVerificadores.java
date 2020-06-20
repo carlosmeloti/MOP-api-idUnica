@@ -2,11 +2,8 @@ package br.embrapa.dto;
 
 import java.math.BigDecimal;
 
-import br.embrapa.model.CadNivelDeAvaliacao;
-import br.embrapa.model.ModVerificadoresMonitoramentoTemplate;
-import br.embrapa.model.Verificador_m;
-
 public class TodosOsVerificadores {
+	
 	
 	private String codalfa;
 	private String nmNivelDeAvaliacao;

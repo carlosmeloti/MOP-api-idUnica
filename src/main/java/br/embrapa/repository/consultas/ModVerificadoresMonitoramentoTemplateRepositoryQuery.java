@@ -14,6 +14,8 @@ import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplat
 import br.embrapa.repository.projections.ResumoVerificadoresMonitoramentoTemplateTeste;
 
 public interface ModVerificadoresMonitoramentoTemplateRepositoryQuery {
+	
+	public List<TodosOsVerificadores> listaTeste(Long cdTemplate);
 
 	public List<TodosOsVerificadores> todosVerificadores(Long cdTemplate);
 	
