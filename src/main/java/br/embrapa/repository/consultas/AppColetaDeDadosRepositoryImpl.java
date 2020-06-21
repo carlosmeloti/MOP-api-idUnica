@@ -78,7 +78,7 @@ public class AppColetaDeDadosRepositoryImpl implements AppColetaDeDadosRepositor
 		}
 		if (appColetaDeDadosFilter.getCdAvaliacao() != null) {
 			predicates.add(
-					builder.equal(root.get(AppColetaDeDados_.cdAvaliacao).get(AppAvaliacao_.cdAvaliacao), appColetaDeDadosFilter.getCdMonitoramento()));
+					builder.equal(root.get(AppColetaDeDados_.cdAvaliacao).get(AppAvaliacao_.cdAvaliacao), appColetaDeDadosFilter.getCdAvaliacao()));
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
