@@ -3,6 +3,8 @@ package br.embrapa.resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -31,6 +33,9 @@ import br.embrapa.service.AppMonitoramentoService;
 @RestController
 @RequestMapping("/appmonitoramento")
 public class AppMonitoramentoResource {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AppMonitoramentoResource.class);
+
 
 	@Autowired
 	private AppMonitoramentoRepository appMonitoramentoRepository;
@@ -58,7 +63,8 @@ public class AppMonitoramentoResource {
 		AppMonitoramento appMonitoramentoSalva = appMonitoramentoRepository.save(appMonitoramento);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, appMonitoramento.getCdMonitoramento()));
-		
+		LOGGER.info("Monitoramento salvo com sucesso!");
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(appMonitoramentoSalva);
 	}
 	
@@ -75,12 +81,14 @@ public class AppMonitoramentoResource {
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_CADAMOSTRAGEM') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		appMonitoramentoRepository.delete(codigo);
+		LOGGER.info("Monitoramento removido com sucesso!");
 	}
 	
 	@PutMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CADAMOSTRAGEM') and #oauth2.hasScope('write')")
 	public ResponseEntity<AppMonitoramento> atualizar(@PathVariable Long codigo, @Valid @RequestBody AppMonitoramento appMonitoramento) {
 		AppMonitoramento appMonitoramentoSalva = appMonitoramentoService.atualizar(codigo, appMonitoramento);
+		LOGGER.info("Monitoramento atualizado com sucesso!");
 		return ResponseEntity.ok(appMonitoramentoSalva);
 	}
 		

@@ -3,6 +3,8 @@ package br.embrapa.resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,8 @@ import br.embrapa.service.AppColetaDeDadosService;
 @RequestMapping("/appcoletadedados")
 public class AppColetaDeDadosResource {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AppColetaDeDadosResource.class);
+
 
 	@Autowired
 	private AppColetaDeDadosRepository appColetaDeDadosRepository;
@@ -53,6 +57,8 @@ public class AppColetaDeDadosResource {
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, appColetaDeDados.getCdColetaDeDaDos()));
 		
+		LOGGER.info("Coleta de Dados salva com sucesso!");
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(appColetaDeDadosSalva);
 	}
 	
@@ -69,12 +75,15 @@ public class AppColetaDeDadosResource {
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_CADAMOSTRAGEM') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		appColetaDeDadosRepository.delete(codigo);
+		LOGGER.info("Coleta de Dados removida com sucesso!");
+
 	}
 	
 	@PutMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CADAMOSTRAGEM') and #oauth2.hasScope('write')")
 	public ResponseEntity<AppColetaDeDados> atualizar(@PathVariable Long codigo, @Valid @RequestBody AppColetaDeDados appColetaDeDados) {
 		AppColetaDeDados appColetaDeDadosSalva = appColetaDeDadosService.atualizar(codigo, appColetaDeDados);
+		LOGGER.info("Coleta de Dados atualizada com sucesso!");
 		return ResponseEntity.ok(appColetaDeDadosSalva);
 	}
 	

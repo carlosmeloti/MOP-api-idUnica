@@ -3,6 +3,8 @@ package br.embrapa.resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,9 @@ import br.embrapa.service.CadMaterialService;
 @RestController
 @RequestMapping("/cadmaterial")
 public class CadMaterialResource {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CadMaterialResource.class);
+
 
 	@Autowired
 	private CadMaterialRepository cadMaterialRepository;
@@ -58,7 +63,8 @@ public class CadMaterialResource {
 		CadMaterial cadMaterialSalva = cadMaterialRepository.save(cadMaterial);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, cadMaterialSalva.getCdMaterial()));
-		
+		LOGGER.info("Material salvo com sucesso!");
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(cadMaterialSalva);
 	}
 	
@@ -75,13 +81,18 @@ public class CadMaterialResource {
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_CADMATERIAL') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		cadMaterialRepository.delete(codigo);
+		LOGGER.info("Material removido com sucesso!");
+
 	}
 	
 	@PutMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CADMATERIAL') and #oauth2.hasScope('write')")
 	public ResponseEntity<CadMaterial> atualizar(@PathVariable Long codigo, @Valid @RequestBody CadMaterial cadMaterial) {
 		CadMaterial cadMaterialSalva = cadMaterialService.atualizar(codigo, cadMaterial);
+		LOGGER.info("Material removido com sucesso!");
+
 		return ResponseEntity.ok(cadMaterialSalva);
+		
 	}
 	
 }

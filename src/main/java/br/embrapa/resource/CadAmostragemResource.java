@@ -3,6 +3,8 @@ package br.embrapa.resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -31,6 +33,9 @@ import br.embrapa.service.CadAmostragemService;
 @RestController
 @RequestMapping("/cadamostragem")
 public class CadAmostragemResource {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CadAmostragemResource.class);
+
 
 	@Autowired
 	private CadAmostragemRepository cadAmostragemRepository;
@@ -61,7 +66,8 @@ public class CadAmostragemResource {
 		CadAmostragem cadAmostragemSalva = cadAmostragemRepository.save(cadAmostragem);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, cadAmostragemSalva.getCdAmostragem()));
-		
+		LOGGER.info("Amostragem salva com sucesso!");
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(cadAmostragemSalva);
 	}
 	
@@ -84,6 +90,8 @@ public class CadAmostragemResource {
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CADAMOSTRAGEM') and #oauth2.hasScope('write')")
 	public ResponseEntity<CadAmostragem> atualizar(@PathVariable Long codigo, @Valid @RequestBody CadAmostragem cadAmostragem) {
 		CadAmostragem cadAmostragemSalva = cadAmostragemService.atualizar(codigo, cadAmostragem);
+		LOGGER.info("Amostragem atualizada com sucesso!");
+
 		return ResponseEntity.ok(cadAmostragemSalva);
 	}
 		

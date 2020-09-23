@@ -3,6 +3,8 @@ package br.embrapa.resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,9 @@ import br.embrapa.service.AppAvaliacaoService;
 @RequestMapping("/appavaliacao")
 public class AppAvaliacaoResource {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AppAvaliacaoResource.class);
+
+	
 	@Autowired
 	private AppAvaliacaoRepository appAvaliacaoRepository;
 	
@@ -52,6 +57,8 @@ public class AppAvaliacaoResource {
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, appAvaliacao.getCdAvaliacao()));
 		
+		LOGGER.info("Avaliação salva com sucesso!");
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(appAvaliacaoSalva);
 	}
 	
@@ -68,13 +75,16 @@ public class AppAvaliacaoResource {
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_CADAMOSTRAGEM') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		appAvaliacaoRepository.delete(codigo);
+		LOGGER.info("Avaliação removida com sucesso!");
 	}
 	
 	@PutMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CADAMOSTRAGEM') and #oauth2.hasScope('write')")
 	public ResponseEntity<AppAvaliacao> atualizar(@PathVariable Long codigo, @Valid @RequestBody AppAvaliacao appAvaliacao) {
 		AppAvaliacao appAvaliacaoSalva = appAvaliacaoService.atualizar(codigo, appAvaliacao);
+		LOGGER.info("Avaliação atualizada com sucesso!");
 		return ResponseEntity.ok(appAvaliacaoSalva);
+			
 	}
 	
 	

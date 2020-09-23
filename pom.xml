@@ -75,6 +75,7 @@
 			<artifactId>hibernate-java8</artifactId>
 		</dependency>
 		
+		
 		<!-- Suporte do Jackson para as datas do  Java 8 -->
 		
 		<dependency>

@@ -3,6 +3,8 @@ package br.embrapa.resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -31,6 +33,7 @@ import br.embrapa.service.CadFrequenciaService;
 @RequestMapping("/cadfrequencia")
 public class CadFrequenciaResource {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CadFrequenciaResource.class);
 	
 	@Autowired
 	private CadFrequenciaRepository cadFrequenciaRepository;
@@ -60,7 +63,7 @@ public class CadFrequenciaResource {
 		CadFrequencia cadFrequenciaSalva = cadFrequenciaRepository.save(cadFrequencia);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, cadFrequenciaSalva.getCdFrequencia()));
-		
+		LOGGER.info("Frequência salva com sucesso!");
 		return ResponseEntity.status(HttpStatus.CREATED).body(cadFrequenciaSalva);
 	}
 	
@@ -77,12 +80,14 @@ public class CadFrequenciaResource {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
 		cadFrequenciaRepository.delete(codigo);
+		LOGGER.info("Frequência removida com sucesso!");
 	}
 	
 	@PutMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CADFREQUENCIA') and #oauth2.hasScope('write')")
 	public ResponseEntity<CadFrequencia> atualizar(@PathVariable Long codigo, @Valid @RequestBody CadFrequencia cadFrequencia) {
 		CadFrequencia cadFrequenciaSalva = cadFrequenciaService.atualizar(codigo, cadFrequencia);
+		LOGGER.info("Frequência atualizada com sucesso!");
 		return ResponseEntity.ok(cadFrequenciaSalva);
 	}
 }
